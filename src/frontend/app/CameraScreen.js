@@ -1,32 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { View, Button, StyleSheet } from 'react-native';
-import { CameraView, useCameraPermissions } from 'expo-camera';
+import * as ImagePicker from 'expo-image-picker';
 
-export default function CameraScreen() {
-  const [permission, requestPermission] = useCameraPermissions();
-  const [isCameraReady, setIsCameraReady] = useState(false);
-
-  useEffect(() => {
-    if (!permission?.granted) {
-      requestPermission();
+export default function CameraScreen({ navigation }) {
+  const abrirCamera = async () => {
+    const { status } = await ImagePicker.requestCameraPermissionsAsync();
+    if (status !== 'granted') {
+      alert('Permissão necessária');
+      return;
     }
-  }, []);
 
-  if (!permission?.granted) {
-    return <View><Button title="Permitir Câmera" onPress={requestPermission} /></View>;
-  }
+    const result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      quality: 0.8,
+    });
+
+    if (!result.canceled) {
+      navigation.navigate('Post', { photoUri: result.assets[0].uri });
+    }
+  };
 
   return (
     <View style={styles.container}>
-      <CameraView 
-        style={styles.camera} 
-        onCameraReady={() => setIsCameraReady(true)}
-      />
+      <Button title="Abrir Câmera" onPress={abrirCamera} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  camera: { flex: 1 },
+  container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
 });

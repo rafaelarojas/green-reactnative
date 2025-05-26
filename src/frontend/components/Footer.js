@@ -1,42 +1,44 @@
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { AntDesign, Feather, MaterialIcons, Ionicons } from '@expo/vector-icons';
 
 export default function Footer({ navigation, active }) {
-  const iconColor = (name) => name === active ? '#2e4e1f' : '#3d4420';
-
   return (
-    <View style={styles.footer}>
+    <View style={styles.container}>
       <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-        <Ionicons name="grid-outline" size={24} color={iconColor('home')} />
+        <AntDesign name="home" size={24} color={active === 'home' ? '#3d4420' : '#999'} />
       </TouchableOpacity>
+
       <TouchableOpacity onPress={() => navigation.navigate('Feed')}>
-        <Ionicons name="list" size={24} color={iconColor('feed')} />
+        <Feather name="feed" size={24} color={active === 'feed' ? '#3d4420' : '#999'} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Favorites')}>
-        <Ionicons name="heart-outline" size={24} color={iconColor('favorites')} />
+
+      <TouchableOpacity onPress={() => navigation.navigate('Favoritos')}>
+        <AntDesign name="heart" size={24} color={active === 'favoritos' ? '#3d4420' : '#999'} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
-        <Ionicons name="notifications-outline" size={24} color={iconColor('notifications')} />
+
+      <TouchableOpacity onPress={() => navigation.navigate('Notificacoes')}>
+        <Ionicons name="notifications-outline" size={24} color={active === 'notificacoes' ? '#3d4420' : '#999'} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
-        <Ionicons name="settings-outline" size={24} color={iconColor('settings')} />
+
+      <TouchableOpacity onPress={() => navigation.navigate('Configuracoes')}>
+        <MaterialIcons name="settings" size={24} color={active === 'configuracoes' ? '#3d4420' : '#999'} />
       </TouchableOpacity>
     </View>
   );
 }
 
-const styles = {
-  footer: {
+const styles = StyleSheet.create({
+  container: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    alignItems: 'center',
     paddingVertical: 12,
     borderTopWidth: 1,
-    borderTopColor: '#eee',
+    borderColor: '#eee',
+    backgroundColor: '#fff',
     position: 'absolute',
     bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: '#fff',
+    width: '100%',
   },
-};
+});

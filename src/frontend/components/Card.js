@@ -1,50 +1,40 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
-export default function Card({ title, description }) {
-  const [liked, setLiked] = useState(false);
-
+export default function RecipeCard({ title, description, image, onPress }) {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={onPress}>
+      <Image source={{ uri: image }} style={styles.image} />
       <View style={styles.textContainer}>
         <Text style={styles.title}>{title}</Text>
-        <Text numberOfLines={1} style={styles.description}>{description}</Text>
+        <Text style={styles.description}>{description}</Text>
       </View>
-      <TouchableOpacity onPress={() => setLiked(!liked)}>
-        <Ionicons
-          name={liked ? 'heart' : 'heart-outline'}
-          size={24}
-          color="#3d4420"
-        />
-      </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#fff',
-    padding: 12,
-    marginVertical: 6,
-    borderRadius: 12,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    backgroundColor: '#f9f9f9',
+    borderRadius: 8,
+    marginVertical: 8,
+    overflow: 'hidden',
     elevation: 2,
   },
+  image: {
+    width: '100%',
+    height: 150,
+  },
   textContainer: {
-    flex: 1,
-    marginRight: 8,
+    padding: 12,
   },
   title: {
     fontWeight: 'bold',
-    fontSize: 14,
+    fontSize: 16,
     color: '#3d4420',
   },
   description: {
-    fontSize: 12,
-    color: '#888',
+    color: '#666',
     marginTop: 4,
   },
 });

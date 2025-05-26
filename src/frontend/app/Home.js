@@ -8,16 +8,20 @@ export default function Home({ navigation }) {
   const [search, setSearch] = useState('');
 
   const recipes = [
-    { id: '1', title: 'Receita 1', description: 'Lorem ipsum dolor sit amet, consectetur Lo...' },
-    { id: '2', title: 'Receita 2', description: 'Lorem ipsum dolor sit amet, consectetur Lo...' },
-    { id: '3', title: 'Receita 3', description: 'Lorem ipsum dolor sit amet, consectetur Lo...' },
-    { id: '4', title: 'Receita 4', description: 'Lorem ipsum dolor sit amet, consectetur Lo...' },
-    { id: '5', title: 'Receita 5', description: 'Lorem ipsum dolor sit amet, consectetur Lo...' },
+    { 
+      id: '1', 
+      title: 'Pizza saudável', 
+      description: 'Pizza com aveia, peito de frango e queijo.', 
+      image: 'https://i.imgur.com/your-image-link.jpg' 
+    },
+    { id: '2', title: 'Salada fresca', description: 'Alface, tomate e pepino.', image: 'https://i.imgur.com/your-image-link.jpg' },
+    { id: '3', title: 'Smoothie de frutas', description: 'Banana, morango e iogurte.', image: 'https://i.imgur.com/your-image-link.jpg' },
+    { id: '4', title: 'Omelete fit', description: 'Ovos, espinafre e ricota.', image: 'https://i.imgur.com/your-image-link.jpg' },
+    { id: '5', title: 'Panqueca proteica', description: 'Aveia, banana e whey.', image: 'https://i.imgur.com/your-image-link.jpg' },
   ];
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header com logo centralizado */}
       <View style={styles.header}>
         <View style={{ width: 24 }} />
         <Text style={styles.logo}>green</Text>
@@ -30,12 +34,16 @@ export default function Home({ navigation }) {
         data={recipes.filter(r => r.title.toLowerCase().includes(search.toLowerCase()))}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
-          <RecipeCard title={item.title} description={item.description} />
+          <RecipeCard
+            title={item.title}
+            description={item.description}
+            image={item.image}
+            onPress={() => navigation.navigate('RecipeDetails', { recipe: item })}
+          />
         )}
         contentContainerStyle={{ paddingBottom: 80 }}
       />
 
-      {/* Footer Navigation */}
       <Footer navigation={navigation} active="home" />
     </SafeAreaView>
   );
