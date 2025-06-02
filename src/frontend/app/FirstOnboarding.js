@@ -17,9 +17,9 @@ export default function FirstOnboarding({ navigation }) {
       </View>
 
       <View style={styles.middle}>
-        <Text style={styles.title}>Bem-vindo ao{'\n'}melhor App de{'\n'}receitas saudáveis</Text>
+        <Text style={styles.title}>Bem-vindo ao{'\n'}melhor App de{'\n'}itens</Text>
         <Text style={styles.subtitle}>
-          Aqui, você consegue visualizar mais de{'\n'}10.000 receitas saudáveis
+          Aqui, você consegue visualizar mais de{'\n'}5.000 itens
         </Text>
       </View>
 

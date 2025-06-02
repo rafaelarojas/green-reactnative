@@ -19,7 +19,7 @@ export default function SecondaryOnboarding({ navigation }) {
       <View style={styles.middle}>
         <Text style={styles.title}>Explore, faça e{'\n'}compartilhe</Text>
         <Text style={styles.subtitle}>
-          Faça as receitas de forma simples, e{'\n'}
+          Peça itens de forma simples, e{'\n'}
           compartilhe o resultado com seus amigos!
         </Text>
       </View>

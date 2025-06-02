@@ -17,7 +17,7 @@ export default function AuthLandingScreen({ navigation }) {
       </View>
 
       <View style={styles.middle}>
-        <Text style={styles.title}>Faça sua conta e{'\n'}comece suas receitas!</Text>
+        <Text style={styles.title}>Faça sua conta e{'\n'}faça seu pedido!</Text>
       </View>
 
       <View style={styles.buttons}>
