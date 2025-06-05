@@ -9,12 +9,12 @@ export default function Footer({ navigation, active }) {
         <AntDesign name="home" size={24} color={active === 'home' ? '#3d4420' : '#999'} />
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Feed')}>
-        <Feather name="feed" size={24} color={active === 'feed' ? '#3d4420' : '#999'} />
+      <TouchableOpacity onPress={() => navigation.navigate('Camera')}>
+        <Feather name="camera" size={24} color={active === 'camera' ? '#3d4420' : '#999'} />
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Favoritos')}>
-        <AntDesign name="heart" size={24} color={active === 'favoritos' ? '#3d4420' : '#999'} />
+      <TouchableOpacity onPress={() => navigation.navigate('Feed')}>
+        <MaterialIcons name="dynamic-feed" size={24} color={active === 'feed' ? '#3d4420' : '#999'} />
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => navigation.navigate('Notificacoes')}>
