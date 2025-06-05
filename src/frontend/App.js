@@ -14,7 +14,6 @@ import Feed from './app/Feed';
 import Camera from './app/CameraScreen';
 import Post from './app/PostScreen';
 import RecipeDetails from './app/RecepeDetails';
-import Favoritos from './app/Favoritos';
 import Notificacoes from './app/Notificacoes';
 import Configuracoes from './app/Configuracoes';
 
@@ -42,7 +41,6 @@ export default function App() {
           <Stack.Screen name="Camera" component={Camera} />
           <Stack.Screen name="Post" component={Post} />
           <Stack.Screen name="RecipeDetails" component={RecipeDetails} />
-          <Stack.Screen name="Favoritos" component={Favoritos} />
           <Stack.Screen name="Notificacoes" component={Notificacoes} />
           <Stack.Screen name="Configuracoes" component={Configuracoes} />
 
