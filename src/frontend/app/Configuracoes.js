@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, Image } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  SafeAreaView,
+  Image,
+  Alert,
+} from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 import Feather from 'react-native-vector-icons/Feather';
 import Footer from '../components/Footer';
 
@@ -7,11 +17,30 @@ export default function Configuracoes({ navigation }) {
   const [nome, setNome] = useState('Teste Ponderada');
   const [email, setEmail] = useState('testeponderada@gmail.com');
   const [senha, setSenha] = useState('********');
+  const [imagemPerfil, setImagemPerfil] = useState(null);
 
   const handleAlterar = () => {
-    // Aqui você pode implementar a lógica para alterar os dados
     console.log('Alterações salvas:', { nome, email, senha });
-    alert('Dados alterados com sucesso!');
+    Alert.alert('Sucesso', 'Dados alterados com sucesso!');
+  };
+
+  const selecionarImagem = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== 'granted') {
+      Alert.alert('Permissão necessária', 'Precisamos de acesso à galeria para trocar a foto.');
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImagemPerfil(result.assets[0].uri);
+    }
   };
 
   return (
@@ -25,10 +54,15 @@ export default function Configuracoes({ navigation }) {
         <View style={{ width: 24 }} />
       </View>
 
-      {/* Ícone do usuário */}
-      <View style={styles.avatarContainer}>
-        <Feather name="user" size={48} color="#3d4420" style={styles.avatar} />
-      </View>
+      {/* Imagem de perfil */}
+      <TouchableOpacity style={styles.avatarContainer} onPress={selecionarImagem}>
+        {imagemPerfil ? (
+          <Image source={{ uri: imagemPerfil }} style={styles.avatarImage} />
+        ) : (
+          <Feather name="user" size={48} color="#3d4420" style={styles.avatarIcon} />
+        )}
+        <Text style={styles.avatarText}>Alterar foto</Text>
+      </TouchableOpacity>
 
       {/* Campos de texto */}
       <TextInput
@@ -91,11 +125,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 24,
   },
-  avatar: {
+  avatarIcon: {
     backgroundColor: '#fff',
     padding: 16,
     borderRadius: 50,
     elevation: 4,
+  },
+  avatarImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    elevation: 4,
+  },
+  avatarText: {
+    marginTop: 8,
+    fontSize: 14,
+    color: '#3d4420',
   },
   input: {
     backgroundColor: '#f9f9f9',

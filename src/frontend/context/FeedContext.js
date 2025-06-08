@@ -7,7 +7,7 @@ export const FeedProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
 
   return (
-    <FeedContext.Provider value={{ posts, setPosts }}>
+    <FeedContext.Provider>
       {children}
     </FeedContext.Provider>
   );

@@ -6,11 +6,11 @@ import Footer from '../components/Footer';
 export default function Notificacoes({ navigation }) {
   const [notifications, setNotifications] = useState([
     { id: '1', text: 'Venha realizar mais receitas com o nosso App', expanded: false },
-    { id: '2', text: 'Venha realizar mais receitas com o nosso App', expanded: false },
-    { id: '3', text: 'Venha realizar mais receitas com o nosso App', expanded: false },
-    { id: '4', text: 'Venha realizar mais receitas com o nosso App', expanded: false },
-    { id: '5', text: 'Venha realizar mais receitas com o nosso App', expanded: false },
-    { id: '6', text: 'Venha realizar mais receitas com o nosso App', expanded: false },
+    { id: '2', text: 'Descubra novas receitas saudáveis para o seu dia a dia!', expanded: false },
+    { id: '3', text: 'Salve suas receitas favoritas com um clique.', expanded: false },
+    { id: '4', text: 'Já tomou seu matcha latte hoje? Experimente com novas combinações!', expanded: false },
+    { id: '5', text: 'Adicionamos novas funcionalidades no app, confira!', expanded: false },
+    { id: '6', text: 'Compartilhe receitas com seus amigos pelo app!', expanded: false },
   ]);
 
   const toggleExpand = (id) => {
@@ -37,19 +37,16 @@ export default function Notificacoes({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Feather name="arrow-left" size={24} color="#3d4420" />
         </TouchableOpacity>
         <Text style={styles.logo}>green</Text>
-        <View style={{ width: 24 }} /> {/* Espaço para alinhamento */}
+        <View style={{ width: 24 }} />
       </View>
 
-      {/* Título */}
       <Text style={styles.title}>Notificações</Text>
 
-      {/* Lista de Notificações */}
       <FlatList
         data={notifications}
         keyExtractor={(item) => item.id}
@@ -57,7 +54,6 @@ export default function Notificacoes({ navigation }) {
         contentContainerStyle={styles.listContent}
       />
 
-      {/* Footer */}
       <Footer navigation={navigation} active="notificacoes" />
     </SafeAreaView>
   );
