@@ -18,34 +18,37 @@ import Notificacoes from './app/Notificacoes';
 import Configuracoes from './app/Configuracoes';
 
 import { FeedContext } from './context/FeedContext';
+import { PostProvider } from './context/PostContext';
 
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <FeedContext>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Onboarding"
-          screenOptions={{ headerShown: false }}
-        >
-          <Stack.Screen name="Onboarding" component={FirstOnboarding} />
-          <Stack.Screen name="Onboarding2" component={SecondOnboarding} />
-          <Stack.Screen name="AuthLanding" component={AuthLandingScreen} />
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-          <Stack.Screen name="ResetPassword" component={ResetPassword} />
-          <Stack.Screen name="Feed" component={Feed} />
-          <Stack.Screen name="Camera" component={Camera} />
-          <Stack.Screen name="Post" component={Post} />
-          <Stack.Screen name="RecipeDetails" component={RecipeDetails} />
-          <Stack.Screen name="Notificacoes" component={Notificacoes} />
-          <Stack.Screen name="Configuracoes" component={Configuracoes} />
+    <PostProvider>
+      <FeedContext>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="Onboarding"
+            screenOptions={{ headerShown: false }}
+          >
+            <Stack.Screen name="Onboarding" component={FirstOnboarding} />
+            <Stack.Screen name="Onboarding2" component={SecondOnboarding} />
+            <Stack.Screen name="AuthLanding" component={AuthLandingScreen} />
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+            <Stack.Screen name="ResetPassword" component={ResetPassword} />
+            <Stack.Screen name="Feed" component={Feed} />
+            <Stack.Screen name="Camera" component={Camera} />
+            <Stack.Screen name="Post" component={Post} />
+            <Stack.Screen name="RecipeDetails" component={RecipeDetails} />
+            <Stack.Screen name="Notificacoes" component={Notificacoes} />
+            <Stack.Screen name="Configuracoes" component={Configuracoes} />
 
-        </Stack.Navigator>
-      </NavigationContainer>
-    </FeedContext>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </FeedContext>
+    </PostProvider>
   );
 }

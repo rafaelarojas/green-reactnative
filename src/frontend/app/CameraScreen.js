@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
-import { View, Button, Image, Modal, TextInput, Text, Alert } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { View, Button, Image, Modal, TextInput, Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import { PostContext } from '../context/PostContext';
 
-export default function CameraScreen() {
+export default function CameraScreen({ navigation }) {
+  const { adicionarPost } = useContext(PostContext);
+
   const [imagemSelecionada, setImagemSelecionada] = useState(null);
   const [modalVisivel, setModalVisivel] = useState(false);
   const [descricao, setDescricao] = useState('');
@@ -17,7 +20,6 @@ export default function CameraScreen() {
     const resultado = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4, 3],
       quality: 0.8,
     });
 
@@ -37,7 +39,6 @@ export default function CameraScreen() {
     const resultado = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4, 3],
       quality: 0.8,
     });
 
@@ -48,11 +49,15 @@ export default function CameraScreen() {
   };
 
   const enviarImagem = () => {
-    console.log('Imagem:', imagemSelecionada);
-    console.log('Descrição:', descricao);
-    setModalVisivel(false);
-    setImagemSelecionada(null);
-    setDescricao('');
+    if (adicionarPost) {
+      adicionarPost(imagemSelecionada, descricao);
+      setModalVisivel(false);
+      setImagemSelecionada(null);
+      setDescricao('');
+      navigation.navigate('Feed');
+    } else {
+      Alert.alert('Erro', 'Contexto de post não disponível');
+    }
   };
 
   return (

@@ -4,9 +4,9 @@ import Feather from 'react-native-vector-icons/Feather';
 import Footer from '../components/Footer';
 
 export default function Configuracoes({ navigation }) {
-  const [nome, setNome] = useState('João Silva');
-  const [email, setEmail] = useState('joao@example.com');
-  const [senha, setSenha] = useState('******');
+  const [nome, setNome] = useState('Teste Ponderada');
+  const [email, setEmail] = useState('testeponderada@gmail.com');
+  const [senha, setSenha] = useState('********');
 
   const handleAlterar = () => {
     // Aqui você pode implementar a lógica para alterar os dados
