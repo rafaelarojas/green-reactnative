@@ -64,7 +64,7 @@ export default function Login({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
+      <TouchableOpacity onPress={() => navigation.navigate('EnterEmail')}>
         <Text style={styles.forgot}>esqueci minha senha</Text>
       </TouchableOpacity>
 

@@ -9,6 +9,7 @@ import FirstOnboarding from './app/FirstOnboarding';
 import SecondOnboarding from './app/SecondOnboarding';
 import AuthLandingScreen from './app/AuthLandingScreen';
 import Login from './app/Login';
+import Cadastro from './app/Cadastro';
 import ForgotPassword from './app/ForgotPassword';
 import ResetPassword from './app/ResetPassword';
 import Home from './app/Home'; 
@@ -18,6 +19,7 @@ import Post from './app/PostScreen';
 import RecipeDetails from './app/RecepeDetails';
 import Notificacoes from './app/Notificacoes';
 import Configuracoes from './app/Configuracoes';
+import EnterEmail from './app/EnterEmail';
 
 import { FeedContext } from './context/FeedContext';
 import { PostProvider } from './context/PostContext';
@@ -41,6 +43,7 @@ export default function App() {
                 <Stack.Screen name="Onboarding2" component={SecondOnboarding} />
                 <Stack.Screen name="AuthLanding" component={AuthLandingScreen} />
                 <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="Cadastro" component={Cadastro} />
                 <Stack.Screen name="Home" component={Home} />
                 <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
                 <Stack.Screen name="ResetPassword" component={ResetPassword} />
@@ -50,6 +53,7 @@ export default function App() {
                 <Stack.Screen name="RecipeDetails" component={RecipeDetails} />
                 <Stack.Screen name="Notificacoes" component={Notificacoes} />
                 <Stack.Screen name="Configuracoes" component={Configuracoes} />
+                <Stack.Screen name="EnterEmail" component={EnterEmail} />
               </Stack.Navigator>
               <Toast />
             </>
