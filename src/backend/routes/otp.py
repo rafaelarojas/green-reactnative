@@ -1,19 +1,67 @@
-from fastapi import APIRouter
-from models.otp_models import EmailModel, OTPModel, ResetModel
-from services.otp_service import OTPService
+import random
+import time
+from fastapi import HTTPException
+from pydantic import BaseModel
+import smtplib
+from email.message import EmailMessage
+from dotenv import load_dotenv
+import os
 
-router = APIRouter()
 
-otp_service = OTPService()
+load_dotenv()  
 
-@router.post("/send-otp")
-def send_otp(data: EmailModel):
-    return otp_service.send_otp(data)
+class EmailModel(BaseModel):
+    email: str
 
-@router.post("/verify-otp")
-def verify_otp(data: OTPModel):
-    return otp_service.verify_otp(data)
+class OTPModel(BaseModel):
+    email: str
+    otp: str
 
-@router.post("/reset-password")
-def reset_password(data: ResetModel):
-    return otp_service.reset_password(data)
+class ResetModel(BaseModel):
+    email: str
+    senha: str
+
+
+class OPT:
+    def __init__(self):
+        self.otp_storage = {}
+
+    def send_otp(self, data: EmailModel):
+
+        otp = str(random.randint(100000, 999999))
+        self.otp_storage[data.email] = {"otp": otp, "expires": time.time() + 300}
+        print(f"Enviar este código para {data.email}: {otp}")
+
+
+
+        corpo_email = f"""
+                         <p>Olá, seu código é: {otp}</p>
+                      """
+
+        msg = EmailMessage()
+        msg['Subject'] = "Assunto"
+        msg['From'] = os.getenv('EMAIL')
+        msg['To'] = f'{data.email}'
+        password = os.getenv('SENHA')
+        msg.set_content(corpo_email, subtype='html')
+
+        with smtplib.SMTP('smtp.gmail.com', 587) as s:
+            s.starttls()
+            s.login(msg['From'], password)
+            s.send_message(msg)
+            print('Email enviado')
+
+
+
+
+        return {"msg": "Código enviado"}
+
+    def verify_otp(self, data: OTPModel):
+        registro = self.otp_storage.get(data.email)
+        if not registro or registro['otp'] != data.otp or time.time() > registro['expires']:
+            raise HTTPException(status_code=400, detail="Código inválido ou expirado")
+        return {"msg": "OTP válido"}
+
+    def reset_password(self, data: ResetModel):
+        print(f"Senha do {data.email} alterada para: {data.senha}")
+        return {"msg": "Senha redefinida com sucesso"}
